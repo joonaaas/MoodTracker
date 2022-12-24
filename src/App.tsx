@@ -60,7 +60,7 @@ const Section = ({ children, title }: SectionProp) => {
   );
 };
 
-const App = () => {
+export const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -121,5 +121,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default App;
