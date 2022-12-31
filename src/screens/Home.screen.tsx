@@ -1,22 +1,23 @@
 import { StyleSheet, View } from 'react-native';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { MoodPicker } from '../components/MoodPicker';
-import { MoodOptionType, MoodOptionWithTimestamp } from '../types';
+import { MoodOptionType } from '../types';
 import { MoodItemRow } from '../components/MoodItemRow';
+import { useMoodStore } from '../stores/useMoodStore';
 
 export default function HomeScreen() {
-  const [moodList, setMoodList] = useState<MoodOptionWithTimestamp[]>([]);
-
-  const handleSelectMood = useCallback((mood: MoodOptionType) => {
-    setMoodList(current => [...current, { mood, timestamp: Date.now() }]);
-  }, []);
+  const { moodList, addMoodList } = useMoodStore();
+  console.log('Hoomme');
+  const handleSelectMood = useCallback(
+    (mood: MoodOptionType) => {
+      addMoodList(mood);
+    },
+    [addMoodList],
+  );
 
   return (
     <View style={styles.container}>
       <MoodPicker handleSelectMood={handleSelectMood} />
-      {moodList.map(item => (
-        <MoodItemRow key={item.timestamp} item={item} />
-      ))}
     </View>
   );
 }
