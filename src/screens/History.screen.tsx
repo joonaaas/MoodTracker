@@ -6,7 +6,6 @@ import { MoodItemRow } from '../components/MoodItemRow';
 export default function HistoryScreen() {
   const { moodList } = useMoodStore();
 
-  console.log('HistoryScreen');
   return (
     <View>
       {moodList.map(item => (

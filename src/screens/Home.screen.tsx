@@ -1,19 +1,21 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useCallback } from 'react';
 import { MoodPicker } from '../components/MoodPicker';
 import { MoodOptionType } from '../types';
-import { MoodItemRow } from '../components/MoodItemRow';
 import { useMoodStore } from '../stores/useMoodStore';
 
 export default function HomeScreen() {
-  const { moodList, addMoodList } = useMoodStore();
-  console.log('Hoomme');
+  const { _hasHydrated, addMoodList } = useMoodStore();
   const handleSelectMood = useCallback(
     (mood: MoodOptionType) => {
       addMoodList(mood);
     },
     [addMoodList],
   );
+
+  if (!_hasHydrated) {
+    return <Text>{JSON.stringify(_hasHydrated)}</Text>;
+  }
 
   return (
     <View style={styles.container}>

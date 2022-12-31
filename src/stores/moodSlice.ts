@@ -16,10 +16,14 @@ export type MoodSlice = State & Actions;
 export const createMoodSlice: StateCreator<State, [], [], MoodSlice> = set => ({
   moodList: [],
   bears: 0,
-  addMoodList: mood =>
-    set(state => ({
-      moodList: [...state.moodList, { mood, timestamp: Date.now() }],
-    })),
+  addMoodList: mood => {
+    set(state => {
+      const data = [...state.moodList, { mood, timestamp: Date.now() }];
+      return {
+        moodList: data,
+      };
+    });
+  },
   increaseBears: () =>
     set(state => ({
       bears: state.bears + 1,
