@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { MoodOptionType } from '../types';
 import { theme } from '../theme';
 
@@ -15,43 +15,61 @@ interface MoodPickerProps {
   handleSelectMood: (mood: MoodOptionType) => void;
 }
 
+const imageSrc = require('../../assets/butterflies.png');
+
 export const MoodPicker = ({ handleSelectMood }: MoodPickerProps) => {
   const [selectedMood, setSelectedMood] = React.useState<MoodOptionType>();
+  const [hasSelected, setHasSelected] = React.useState<boolean>(false);
 
   const handleSelect = useCallback(() => {
     if (selectedMood) {
       handleSelectMood(selectedMood);
       setSelectedMood(undefined);
+      setHasSelected(true);
     }
   }, [selectedMood, handleSelectMood]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>How are you right now?</Text>
-
-      <View style={styles.moodList}>
-        {moodOptions.map(option => (
-          <View key={option.emoji}>
-            <Pressable
-              onPress={() => setSelectedMood(option)}
-              key={option.emoji}
-              style={[
-                styles.moodItem,
-                option.emoji === selectedMood?.emoji
-                  ? styles.selectedMoodItem
-                  : undefined,
-              ]}>
-              <Text style={styles.moodText}>{option.emoji}</Text>
-            </Pressable>
-            <Text style={styles.descriptionText}>
-              {selectedMood?.emoji === option.emoji ? option.description : ' '}
-            </Text>
+      {hasSelected ? (
+        <View>
+          <Image source={imageSrc} style={styles.image} />
+          <Pressable
+            onPress={() => setHasSelected(false)}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Choose another!</Text>
+          </Pressable>
+        </View>
+      ) : (
+        <View>
+          <Text style={styles.heading}>How are you right now?</Text>
+          <View style={styles.moodList}>
+            {moodOptions.map(option => (
+              <View key={option.emoji}>
+                <Pressable
+                  onPress={() => setSelectedMood(option)}
+                  key={option.emoji}
+                  style={[
+                    styles.moodItem,
+                    option.emoji === selectedMood?.emoji
+                      ? styles.selectedMoodItem
+                      : undefined,
+                  ]}>
+                  <Text style={styles.moodText}>{option.emoji}</Text>
+                </Pressable>
+                <Text style={styles.descriptionText}>
+                  {selectedMood?.emoji === option.emoji
+                    ? option.description
+                    : ' '}
+                </Text>
+              </View>
+            ))}
           </View>
-        ))}
-      </View>
-      <Pressable style={styles.button} onPress={handleSelect}>
-        <Text style={styles.buttonText}>Choose</Text>
-      </Pressable>
+          <Pressable style={styles.button} onPress={handleSelect}>
+            <Text style={styles.buttonText}>Choose</Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 };
@@ -109,5 +127,8 @@ const styles = StyleSheet.create({
     color: theme.colorWhite,
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  image: {
+    alignSelf: 'center',
   },
 });
