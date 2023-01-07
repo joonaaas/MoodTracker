@@ -11,6 +11,9 @@ export default function BottomTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerTitleStyle: {
+          fontFamily: theme.fontFamilyRegular,
+        },
         tabBarActiveTintColor: theme.colorBlue,
         tabBarInactiveTintColor: theme.colorGrey,
         tabBarShowLabel: false,

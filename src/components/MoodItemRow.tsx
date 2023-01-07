@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   moodDescription: {
     fontSize: 18,
     color: theme.colorPurple,
-    fontWeight: 'bold',
+    fontFamily: theme.fontFamilyRegular,
   },
   iconAndDescription: {
     flexDirection: 'row',
