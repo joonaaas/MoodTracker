@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { MoodPicker } from '../components/MoodPicker';
 import { MoodOptionType } from '../types';
 import { useMoodStore } from '../stores/useMoodStore';
+import { HomeIcon } from '../components/Icons';
 
 export default function HomeScreen() {
   const imageUrl =
@@ -23,7 +24,6 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Image source={{ uri: imageUrl }} style={{ height: '100%' }} />
-
       <View style={[StyleSheet.absoluteFill, { justifyContent: 'center' }]}>
         <MoodPicker handleSelectMood={handleSelectMood} />
       </View>
