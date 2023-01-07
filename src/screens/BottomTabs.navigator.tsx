@@ -1,12 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './Home.screen';
 import HistoryScreen from './History.screen';
 import AnalyticsScreen from './Analytics.screen';
 import { AnalyticsIcon, HistoryIcon, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabs() {
