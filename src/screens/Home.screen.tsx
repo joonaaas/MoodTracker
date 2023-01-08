@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import { MoodPicker } from '../components/MoodPicker';
 import { MoodOptionType } from '../types';
 import { useMoodStore } from '../stores/useMoodStore';
-import { HomeIcon } from '../components/Icons';
 
 export default function HomeScreen() {
   const imageUrl =

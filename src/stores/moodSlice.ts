@@ -9,6 +9,7 @@ export type State = {
 type Actions = {
   addMoodList: (mood: MoodOptionType) => void;
   increaseBears: () => void;
+  deleteMoodList: (mood: MoodOptionWithTimestamp) => void;
 };
 
 export type MoodSlice = State & Actions;
@@ -19,6 +20,17 @@ export const createMoodSlice: StateCreator<State, [], [], MoodSlice> = set => ({
   addMoodList: mood => {
     set(state => {
       const data = [...state.moodList, { mood, timestamp: Date.now() }];
+      return {
+        moodList: data,
+      };
+    });
+  },
+  deleteMoodList: mood => {
+    set(state => {
+      const data = state.moodList.filter(
+        listItem => listItem.timestamp !== mood.timestamp,
+      );
+
       return {
         moodList: data,
       };
