@@ -8,9 +8,12 @@ export default function HistoryScreen() {
 
   return (
     <ScrollView>
-      {moodList.map(item => (
-        <MoodItemRow key={item.timestamp} item={item} />
-      ))}
+      {moodList
+        .slice()
+        .reverse()
+        .map(item => (
+          <MoodItemRow key={item.timestamp} item={item} />
+        ))}
     </ScrollView>
   );
 }
