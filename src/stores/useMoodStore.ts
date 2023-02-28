@@ -1,7 +1,7 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { createHydrationSlice, HydrationType } from './hydrationSlice';
 import { createMoodSlice, MoodSlice } from './moodSlice';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useMoodStore = create<MoodSlice & HydrationType>()(
@@ -12,7 +12,7 @@ export const useMoodStore = create<MoodSlice & HydrationType>()(
     }),
     {
       name: 'mood-store',
-      getStorage: () => AsyncStorage,
+      storage: createJSONStorage(() => AsyncStorage),
       onRehydrateStorage: () => {
         console.log('hydration starts');
 
